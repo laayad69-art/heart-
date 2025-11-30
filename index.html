@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>يومياتنا - الاء ❤️</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+        }
+        
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #FFA5B5;
+            --accent: #FFD6DC;
+            --light: #FFF9FA;
+            --dark: #5D3B45;
+            --text: #4A2E38;
+            --gold: #FFD166;
+            --blue: #8ECAE6;
+            --purple: #C8B6FF;
+            --green: #8AC926;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        body {
+            background: linear-gradient(135deg, #FFD6DC 0%, #FFA5B5 50%, #C8B6FF 100%);
+            min-height: 100vh;
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            max-width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+        
+        .phone-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            min-height: 95vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .password-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .password-screen h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+        
+        .password-input {
+            width: 100%;
+            max-width: 250px;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 25px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .password-btn {
+            background: white;
+            color: var(--primary);
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .password-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+        
+        .password-error {
+            color: #ffeb3b;
+            margin-top: 10px;
+            display: none;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--purple));
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            position: relative;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 12px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            bottom: 0;
+            z-index: 100;
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--dark);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-item.active {
+            color: var(--primary);
+            opacity: 1;
+        }
+        
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        
+        .content-area {
+            padding: 15px;
+            min-height: calc(100vh - 140px);
+            overflow-y: auto;
+            max-height: calc(95vh - 140px);
+        }
+        
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        .counter-section {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .counter-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            border: 2px solid rgba(255, 214, 220, 0.5);
+        }
+        
+        .counter-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .counter-label {
+            font-size: 0.9rem;
+            color: var(--dark);
+            opacity: 0.9;
+            font-weight: 600;
+        }
+        
+        .heart-main {
+            font-size: 60px;
+            color: white;
+            margin: 15px 0;
+            cursor: pointer;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+            animation: heartbeat 2s infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            5% { transform: scale(1.1); }
+            10% { transform: scale(1); }
+            15% { transform: scale(1.15); }
+            20% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+        
+        .section-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: var(--shadow);
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .section-title {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 8px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(to right, var(--primary), var(--purple));
+            border-radius: 2px;
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, rgba(255, 214, 220, 0.3), rgba(200, 182, 255, 0.2));
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 214, 220, 0.5);
+        }
+        
+        .message {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            text-align: center;
+            color: var(--text);
+        }
+        
+        .memory-item {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+            border-left: 3px solid var(--primary);
+        }
+        
+        .memory-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 12px 0;
+            justify-content: center;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--purple));
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(255, 107, 139, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 12px rgba(255, 107, 139, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(to right, var(--blue), #219EBC);
+            box-shadow: 0 3px 10px rgba(33, 158, 188, 0.3);
+        }
+        
+        .btn-success {
+            background: linear-gradient(to right, var(--green), #8AC926);
+            box-shadow: 0 3px 10px rgba(138, 201, 38, 0.3);
+        }
+        
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 214, 220, 0.7);
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-bottom: 12px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(255, 107, 139, 0.2);
+        }
+        
+        .love-meter {
+            width: 100%;
+            height: 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            margin: 12px 0;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .love-progress {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--purple));
+            border-radius: 8px;
+            transition: width 2.5s ease;
+        }
+        
+        .love-text {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .saved-thoughts {
+            margin-top: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+        }
+        
+        .thought-item {
+            background: white;
+            border-radius: 8px;
+            padding: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-left: 3px solid var(--purple);
+        }
+        
+        .thought-date {
+            font-size: 0.75rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+        
+        .privacy-note {
+            background: rgba(255, 214, 220, 0.5);
+            border-radius: 8px;
+            padding: 8px;
+            margin: 8px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--dark);
+            border: 1px dashed var(--primary);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 12px 0;
+        }
+        
+        .stat-item {
+            background: white;
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--dark);
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 70px;
+            right: 50%;
+            transform: translateX(50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.5s ease;
+            max-width: 80%;
+        }
+        
+        .notification.show {
+            transform: translateX(50%) translateY(0);
+            opacity: 1;
+        }
+        
+        .flowers {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .flower {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: flowerFall 8s linear forwards;
+        }
+        
+        @keyframes flowerFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(1000px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .hearts-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 16px;
+            color: var(--primary);
+            animation: float 8s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            33% {
+                transform: translateY(-12px) rotate(120deg);
+            }
+            66% {
+                transform: translateY(6px) rotate(240deg);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* وسائط متعددة */
+        .media-buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: white;
+            background-opacity: 0.8;
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            padding: 12px 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            max-width: 100%;
+            margin: 15px auto;
+            transition: all 0.3s;
+        }
+        
+        .media-buttons:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background-opacity: 0.9;
+        }
+        
+        .media-button {
+            color: #666;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .media-button:hover {
+            transform: scale(1.1);
+        }
+        
+        .media-button.image:hover {
+            color: #e53e3e;
+        }
+        
+        .media-button.video:hover {
+            color: #3182ce;
+        }
+        
+        .media-button.audio:hover {
+            color: #38a169;
+        }
+        
+        .media-button.other:hover {
+            color: #805ad5;
+        }
+        
+        .media-button.more:hover {
+            color: #4a5568;
+        }
+        
+        .media-preview {
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .media-preview.active {
+            display: block;
+        }
+        
+        .preview-item {
+            position: relative;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .preview-item img, .preview-item video {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+        }
+        
+        .audio-preview {
+            width: 100%;
+            padding: 10px;
+            background: #f7fafc;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .remove-media {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(255, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        /* إعدادات كلمة السر */
+        .change-password-form {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .password-input-group {
+            margin-bottom: 10px;
+        }
+        
+        .password-input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* إخفاء شريط التمرير */
+        ::-webkit-scrollbar {
+            width: 0;
+            background: transparent;
+        }
+        
+        .media-icon {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-container">
+        <!-- شاشة كلمة السر -->
+        <div class="password-screen" id="passwordScreen">
+            <h2>يومياتنا - الاء ❤️</h2>
+            <p>أدخل كلمة السر للوصول إلى يومياتنا</p>
+            <input type="password" class="password-input" id="passwordInput" placeholder="كلمة السر">
+            <button class="password-btn" onclick="checkPassword()">دخول</button>
+            <div class="password-error" id="passwordError">كلمة السر غير صحيحة!</div>
+        </div>
+        
+        <div class="header">
+            <h1>يومياتنا - الاء ❤️</h1>
+            <div class="subtitle">كل يوم معاكي أجمل من اللي فاتده</div>
+            <div class="heart-main" onclick="showLoveMeter()">
+                <i class="fas fa-heart"></i>
+            </div>
+        </div>
+        
+        <div class="content-area">
+            <!-- قسم العدادات -->
+            <div class="section active" id="counters-section">
+                <div class="counter-section">
+                    <div class="counter-item">
+                        <div class="counter-value" id="days">0</div>
+                        <div class="counter-label">أيام</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" id="hours">0</div>
+                        <div class="counter-label">ساعات</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" id="minutes">0</div>
+                        <div class="counter-label">دقائق</div>
+                    </div>
+                    <div class="counter-item">
+                        <div class="counter-value" id="seconds">0</div>
+                        <div class="counter-label">ثواني</div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <h3 class="section-title">رسالتي ليكي</h3>
+                    <div class="message-box">
+                        <div class="message">
+                            يا الاء، من أول يوم شفتك وعينيك دول حطوا في قلبي حاجة مش عارف أوصفها. كل يوم بيمشي وانا أحبك أكتر من اللي فات. مش عارف أعبر عن قد إيه انتي مهمة في حياتي، وبصراحة مش عايز أفكر في يوم من غيرك.
+                        </div>
+                    </div>
+                    
+                    <div class="love-meter">
+                        <div class="love-progress" id="loveProgress"></div>
+                    </div>
+                    <div class="love-text" id="loveText"></div>
+                    
+                    <div class="controls">
+                        <button class="btn" onclick="showFlowers()">
+                            <i class="fas fa-spa"></i> ابعتلك ورود
+                        </button>
+                        <button class="btn btn-secondary" onclick="showLoveMeter()">
+                            <i class="fas fa-heartbeat"></i> مقياس حبي
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم الذكريات -->
+            <div class="section" id="memories-section">
+                <div class="section-card">
+                    <h3 class="section-title">ذكرياتنا الحلوة</h3>
+                    <div class="memory-item">
+                        <div class="memory-date">أول مرة شفتك</div>
+                        <div>اليوم اللي غير حياتي</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-date">أول مرة اتكلمنا</div>
+                        <div>صوتك خلى قلبي يرفرف</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-date">أول ضحكة</div>
+                        <div>أجمل ضحكة سمعتها</div>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn" onclick="addMemory()">
+                            <i class="fas fa-plus"></i> أضف ذكري جديدة
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <h3 class="section-title">أحلامنا مع بعض</h3>
+                    <div class="message-box">
+                        <div class="message">
+                            عندي أحلام كتير عايز أحققها معاكي. عايز نسافر سوا لأجمل الأماكن، ونبني بيتنا الصغير، ونعمل مشاريع كتير مع بعض.
+                        </div>
+                    </div>
+                    
+                    <div class="memory-item">
+                        <div class="memory-date">ونجيبلك نونو</div>
+                        <div>أحلى هدية ليكي</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-date">أول رحلة</div>
+                        <div>عايزين نسافر لأجمل مكان</div>
+                    </div>
+                    <div class="memory-item">
+                        <div class="memory-date">بيتنا</div>
+                        <div>نبني بيت صغير مليان حب</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم اليوميات -->
+            <div class="section" id="notes-section">
+                <div class="section-card">
+                    <h3 class="section-title">يومياتي الخاصة</h3>
+                    <div class="message-box">
+                        <div class="message">
+                            اكتبي هنا أي حاجة على بالك... ذكريات، مشاعر، خطط للمستقبل، أي حاجة تخطر على بالك.
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-note">
+                        <i class="fas fa-lock"></i> ملاحظة: هذه اليوميات خاصة جداً، <strong>فقط انتي اللي تقدر تشوفيها</strong> ❤️
+                    </div>
+                    
+                    <textarea id="notesText" placeholder="اكتبي هنا أي حاجة على بالك..."></textarea>
+                    
+                    <!-- أزرار الوسائط المتعددة -->
+                    <div class="media-buttons">
+                        <button class="media-button image" onclick="document.getElementById('imageInput').click()">
+                            <svg class="media-icon" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                        <button class="media-button video" onclick="document.getElementById('videoInput').click()">
+                            <svg class="media-icon" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                        <button class="media-button audio" onclick="document.getElementById('audioInput').click()">
+                            <svg class="media-icon" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                        <button class="media-button other" onclick="addOtherMedia()">
+                            <svg class="media-icon" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                        <button class="media-button more" onclick="showMoreOptions()">
+                            <svg class="media-icon" stroke="currentColor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- معاينة الوسائط -->
+                    <div class="media-preview" id="mediaPreview"></div>
+                    
+                    <!-- مدخلات الملفات المخفية -->
+                    <input type="file" id="imageInput" class="file-input" accept="image/*" onchange="handleMediaSelect(this, 'image')">
+                    <input type="file" id="videoInput" class="file-input" accept="video/*" onchange="handleMediaSelect(this, 'video')">
+                    <input type="file" id="audioInput" class="file-input" accept="audio/*" onchange="handleMediaSelect(this, 'audio')">
+                    
+                    <div class="controls">
+                        <button class="btn" onclick="saveNote()">
+                            <i class="fas fa-save"></i> حفظ
+                        </button>
+                    </div>
+                    
+                    <div class="saved-thoughts" id="savedNotes">
+                        <!-- سيتم عرض اليوميات المحفوظة هنا -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم الأفكار -->
+            <div class="section" id="thoughts-section">
+                <div class="section-card">
+                    <h3 class="section-title">أفكارك وذكرياتك</h3>
+                    <div class="message-box">
+                        <div class="message">
+                            اكتبي هنا أي حاجة على بالك... ذكريات، مشاعر، خطط للمستقبل، أي حاجة تخطر على بالك.
+                        </div>
+                    </div>
+                    
+                    <div class="privacy-note">
+                        <i class="fas fa-lock"></i> ملاحظة: هذه الرسائل خاصة جداً، <strong>فقط انتي اللي تقدر تشوفيها</strong> ❤️
+                    </div>
+                    
+                    <textarea id="thoughtsText" placeholder="اكتبي هنا أي حاجة على بالك..."></textarea>
+                    
+                    <div class="controls">
+                        <button class="btn" onclick="saveThought()">
+                            <i class="fas fa-save"></i> حفظ
+                        </button>
+                    </div>
+                    
+                    <div class="saved-thoughts" id="savedThoughts">
+                        <!-- سيتم عرض الأفكار المحفوظة هنا -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- قسم الإعدادات -->
+            <div class="section" id="settings-section">
+                <div class="section-card">
+                    <h3 class="section-title">الإعدادات</h3>
+                    
+                    <div class="change-password-form">
+                        <h4>تغيير كلمة السر</h4>
+                        <div class="password-input-group">
+                            <label for="currentPassword">كلمة السر الحالية</label>
+                            <input type="password" id="currentPassword" class="password-input" placeholder="أدخل كلمة السر الحالية">
+                        </div>
+                        <div class="password-input-group">
+                            <label for="newPassword">كلمة السر الجديدة</label>
+                            <input type="password" id="newPassword" class="password-input" placeholder="أدخل كلمة السر الجديدة">
+                        </div>
+                        <div class="password-input-group">
+                            <label for="confirmPassword">تأكيد كلمة السر الجديدة</label>
+                            <input type="password" id="confirmPassword" class="password-input" placeholder="أكد كلمة السر الجديدة">
+                        </div>
+                        <div class="controls">
+                            <button class="btn btn-success" onclick="changePassword()">
+                                <i class="fas fa-key"></i> تغيير كلمة السر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <h3 class="section-title">إحصاءاتنا</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="messagesCount">0</div>
+                            <div class="stat-label">رسائل محفوظة</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="notesCount">0</div>
+                            <div class="stat-label">يوميات</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="memoriesCount">3</div>
+                            <div class="stat-label">ذكريات</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="activeDays">8</div>
+                            <div class="stat-label">أيام حب</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="section-card">
+                    <h3 class="section-title">إنجازاتنا</h3>
+                    <div id="achievementsList">
+                        <!-- سيتم عرض الإنجازات هنا -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-container">
+            <div class="nav-item active" data-target="counters-section">
+                <div class="nav-icon"><i class="fas fa-heart"></i></div>
+                <div>الرئيسية</div>
+            </div>
+            <div class="nav-item" data-target="memories-section">
+                <div class="nav-icon"><i class="fas fa-memory"></i></div>
+                <div>ذكريات</div>
+            </div>
+            <div class="nav-item" data-target="notes-section">
+                <div class="nav-icon"><i class="fas fa-book"></i></div>
+                <div>يوميات</div>
+            </div>
+            <div class="nav-item" data-target="thoughts-section">
+                <div class="nav-icon"><i class="fas fa-pen"></i></div>
+                <div>أفكار</div>
+            </div>
+            <div class="nav-item" data-target="settings-section">
+                <div class="nav-icon"><i class="fas fa-cog"></i></div>
+                <div>الإعدادات</div>
+            </div>
+        </div>
+        
+        <div class="flowers" id="flowersContainer"></div>
+        <div class="hearts-container" id="heartsContainer"></div>
+        
+        <div class="notification" id="notification">
+            تم حفظ رسالتك بنجاح! ❤️
+        </div>
+    </div>
+
+    <script>
+        // كلمة السر الافتراضية
+        const DEFAULT_PASSWORD = "1234";
+        
+        // تاريخ البداية - قبل 8 أيام من الآن
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 8);
+        
+        // متغيرات للوسائط
+        let currentMedia = [];
+        
+        // التحقق من كلمة السر
+        function checkPassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const passwordError = document.getElementById('passwordError');
+            
+            // الحصول على كلمة السر المخزنة أو استخدام الافتراضية
+            let storedPassword = localStorage.getItem('alaaPassword');
+            if (!storedPassword) {
+                storedPassword = DEFAULT_PASSWORD;
+                localStorage.setItem('alaaPassword', storedPassword);
+            }
+            
+            if (passwordInput.value === storedPassword) {
+                document.getElementById('passwordScreen').style.display = 'none';
+                initializeApp();
+            } else {
+                passwordError.style.display = 'block';
+                passwordInput.value = '';
+                setTimeout(() => {
+                    passwordError.style.display = 'none';
+                }, 3000);
+            }
+        }
+        
+        // السماح بالدخول باستخدام زر Enter
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // تهيئة التطبيق بعد التحقق من كلمة السر
+        function initializeApp() {
+            createFloatingHearts();
+            loadSavedThoughts();
+            loadSavedNotes();
+            updateStats();
+            
+            // إظهار مقياس الحب بعد 2 ثانية
+            setTimeout(() => {
+                showLoveMeter();
+            }, 2000);
+            
+            // تحديث العداد كل ثانية
+            setInterval(updateCounter, 1000);
+            updateCounter(); // التشغيل الأولي
+        }
+        
+        // تحديث العداد
+        function updateCounter() {
+            const now = new Date();
+            const diffTime = Math.abs(now - startDate);
+            
+            const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diffTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diffTime % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diffTime % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+        
+        // التنقل بين الأقسام
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // إزالة النشاط من جميع العناصر
+                document.querySelectorAll('.nav-item').forEach(nav => {
+                    nav.classList.remove('active');
+                });
+                
+                // إخفاء جميع الأقسام
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                // إضافة النشاط للعنصر المحدد
+                this.classList.add('active');
+                
+                // إظهار القسم المحدد
+                const targetId = this.getAttribute('data-target');
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+        
+        // إنشاء القلوب العائمة
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('floating-heart');
+                heart.innerHTML = '<i class="fas fa-heart"></i>';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 8 + 's';
+                heart.style.fontSize = (Math.random() * 12 + 10) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        
+        // عرض الزهور
+        function showFlowers() {
+            const flowersContainer = document.getElementById('flowersContainer');
+            const flowers = ['🌹', '🌸', '🌺', '💐', '🌷', '🌼', '🌻'];
+            
+            for (let i = 0; i < 20; i++) {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.animationDelay = Math.random() * 6 + 's';
+                flower.style.fontSize = (Math.random() * 16 + 14) + 'px';
+                flowersContainer.appendChild(flower);
+            }
+        }
+        
+        // عرض مقياس الحب
+        function showLoveMeter() {
+            const loveProgress = document.getElementById('loveProgress');
+            const loveText = document.getElementById('loveText');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    loveText.innerHTML = 'بحبك لآخر نفس في حياتي! ❤️';
+                    createFireworks();
+                } else {
+                    width++;
+                    loveProgress.style.width = width + '%';
+                    
+                    if (width < 25) {
+                        loveText.innerHTML = 'بحبك شوية...';
+                    } else if (width < 50) {
+                        loveText.innerHTML = 'بحبك أوي!';
+                    } else if (width < 75) {
+                        loveText.innerHTML = 'بحبك بجنون!';
+                    } else if (width < 90) {
+                        loveText.innerHTML = 'بحبك أكتر من أي حاجة!';
+                    } else {
+                        loveText.innerHTML = 'أنتي كل حاجة في حياتي!';
+                    }
+                }
+            }, 25);
+        }
+        
+        // إضافة ذاكرة جديدة
+        function addMemory() {
+            const memoryText = prompt('اكتب الذكرى الجديدة:');
+            if (memoryText && memoryText.trim() !== '') {
+                showNotification('تم إضافة الذكرى بنجاح! ❤️');
+                updateStats();
+            }
+        }
+        
+        // حفظ الفكرة وإرسالها للتليجرام
+        async function saveThought() {
+            const thoughtsText = document.getElementById('thoughtsText');
+            const text = thoughtsText.value.trim();
+            
+            if (text === '') {
+                alert('من فضلك اكتبي شيئاً أولاً!');
+                return;
+            }
+            
+            // حفظ الرسالة محلياً
+            saveThoughtLocally(text, 'thoughts');
+            
+            // إرسال الرسالة إلى بوت التليجرام
+            const telegramResult = await sendToTelegram(text, 'فكرة');
+            
+            if (telegramResult) {
+                // إظهار إشعار النجاح
+                showNotification('تم حفظ رسالتك بنجاح! ❤️');
+                
+                // مسح الحقل
+                thoughtsText.value = '';
+                
+                // تحديث العرض
+                loadSavedThoughts();
+                updateStats();
+            } else {
+                alert('عذراً، حدث خطأ في الإرسال. حاولي مرة أخرى!');
+            }
+        }
+        
+        // حفظ اليومية وإرسال الوسائط للتليجرام
+        async function saveNote() {
+            const notesText = document.getElementById('notesText');
+            const text = notesText.value.trim();
+            
+            if (text === '' && currentMedia.length === 0) {
+                alert('من فضلك اكتبي شيئاً أو أضيفي وسائط أولاً!');
+                return;
+            }
+            
+            // حفظ اليومية محلياً
+            saveNoteWithMedia(text, currentMedia);
+            
+            // إرسال اليومية إلى بوت التليجرام
+            let messageToSend = text;
+            if (currentMedia.length > 0) {
+                messageToSend += `\n\n[تم إرفاق ${currentMedia.length} وسائط]`;
+                
+                // إرسال كل وسائط إلى التليجرام
+                for (let media of currentMedia) {
+                    await sendMediaToTelegram(media, text);
+                }
+            } else {
+                // إرسال النص فقط
+                await sendToTelegram(messageToSend, 'يومية');
+            }
+            
+            // إظهار إشعار النجاح
+            showNotification('تم حفظ يوميتك بنجاح! ❤️');
+            
+            // مسح الحقل والوسائط
+            notesText.value = '';
+            currentMedia = [];
+            document.getElementById('mediaPreview').innerHTML = '';
+            document.getElementById('mediaPreview').classList.remove('active');
+            
+            // تحديث العرض
+            loadSavedNotes();
+            updateStats();
+        }
+        
+        // حفظ اليومية مع الوسائط
+        function saveNoteWithMedia(text, media) {
+            let notes = JSON.parse(localStorage.getItem('alaanotes') || '[]');
+            const newNote = {
+                text: text,
+                date: new Date().toLocaleString('ar-EG'),
+                media: media
+            };
+            
+            notes.push(newNote);
+            localStorage.setItem('alaanotes', JSON.stringify(notes));
+        }
+        
+        // حفظ الرسالة محلياً
+        function saveThoughtLocally(message, type) {
+            let thoughts = JSON.parse(localStorage.getItem(`alaa${type}`) || '[]');
+            const newThought = {
+                text: message,
+                date: new Date().toLocaleString('ar-EG'),
+                type: type
+            };
+            
+            thoughts.push(newThought);
+            localStorage.setItem(`alaa${type}`, JSON.stringify(thoughts));
+        }
+        
+        // تحميل الأفكار المحفوظة
+        function loadSavedThoughts() {
+            const savedThoughts = document.getElementById('savedThoughts');
+            const thoughts = JSON.parse(localStorage.getItem('alaathoughts') || '[]');
+            
+            if (thoughts.length === 0) {
+                savedThoughts.innerHTML = '<p style="text-align:center; color: var(--dark); opacity:0.7;">لا توجد رسائل محفوظة بعد.</p>';
+                return;
+            }
+            
+            let html = '';
+            thoughts.forEach(thought => {
+                html += `
+                    <div class="thought-item">
+                        <div class="thought-date">${thought.date}</div>
+                        <div>${thought.text}</div>
+                    </div>
+                `;
+            });
+            
+            savedThoughts.innerHTML = html;
+        }
+        
+        // تحميل اليوميات المحفوظة
+        function loadSavedNotes() {
+            const savedNotes = document.getElementById('savedNotes');
+            const notes = JSON.parse(localStorage.getItem('alaanotes') || '[]');
+            
+            if (notes.length === 0) {
+                savedNotes.innerHTML = '<p style="text-align:center; color: var(--dark); opacity:0.7;">لا توجد يوميات محفوظة بعد.</p>';
+                return;
+            }
+            
+            let html = '';
+            notes.forEach(note => {
+                let mediaHtml = '';
+                if (note.media && note.media.length > 0) {
+                    note.media.forEach(media => {
+                        if (media.type === 'image') {
+                            mediaHtml += `<div class="preview-item"><img src="${media.data}" alt="صورة"><button class="remove-media" onclick="removeSavedMedia(this)">×</button></div>`;
+                        } else if (media.type === 'video') {
+                            mediaHtml += `<div class="preview-item"><video controls><source src="${media.data}" type="video/mp4">متصفحك لا يدعم تشغيل الفيديو</video><button class="remove-media" onclick="removeSavedMedia(this)">×</button></div>`;
+                        } else if (media.type === 'audio') {
+                            mediaHtml += `<div class="audio-preview"><audio controls><source src="${media.data}" type="audio/mpeg">متصفحك لا يدعم تشغيل الصوت</audio><button class="remove-media" onclick="removeSavedMedia(this)">×</button></div>`;
+                        }
+                    });
+                }
+                
+                html += `
+                    <div class="thought-item">
+                        <div class="thought-date">${note.date}</div>
+                        <div>${note.text}</div>
+                        ${mediaHtml}
+                    </div>
+                `;
+            });
+            
+            savedNotes.innerHTML = html;
+        }
+        
+        // إرسال الرسالة إلى التليجرام
+        async function sendToTelegram(message, type) {
+            const botToken = '6506189895:AAEwRi0WpBXi3pQ91MAkz8JcsS64v6R5voE';
+            const chatId = '6895524607';
+            
+            const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: `${type} جديدة من الاء:\n\n${message}`
+                    })
+                });
+                
+                const data = await response.json();
+                return data.ok;
+            } catch (error) {
+                console.error('Error sending message to Telegram:', error);
+                return false;
+            }
+        }
+        
+        // إرسال الوسائط إلى التليجرام
+        async function sendMediaToTelegram(media, caption) {
+            const botToken = '6506189895:AAEwRi0WpBXi3pQ91MAkz8JcsS64v6R5voE';
+            const chatId = '6895524607';
+            
+            // في بيئة المتصفح، لا يمكن إرسال الوسائط مباشرة إلى Telegram API
+            // لأن ذلك يتطلب رفع الملف إلى خادم أولاً
+            // بدلاً من ذلك، سنرسل رسالة نصية تشير إلى وجود وسائط
+            const message = `وسائط مرفقة مع اليومية:\n\n${caption || 'يومية جديدة'}\n\n[${media.type} مرفق - ${media.name}]`;
+            
+            return await sendToTelegram(message, 'وسائط');
+        }
+        
+        // عرض الإشعار
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // إنشاء الألعاب النارية عند اكتمال مقياس الحب
+        function createFireworks() {
+            const container = document.getElementById('heartsContainer');
+            for (let i = 0; i < 25; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.classList.add('floating-heart');
+                    firework.innerHTML = '✨';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.animation = 'none';
+                    firework.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    firework.style.opacity = '0.9';
+                    container.appendChild(firework);
+                    
+                    // إزالة الألعاب النارية بعد انتهاء العرض
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+
+        // تحديث الإحصائيات
+        function updateStats() {
+            const thoughts = JSON.parse(localStorage.getItem('alaathoughts') || '[]');
+            const notes = JSON.parse(localStorage.getItem('alaanotes') || '[]');
+            
+            document.getElementById('messagesCount').textContent = thoughts.length;
+            document.getElementById('notesCount').textContent = notes.length;
+            
+            // تحديث الإنجازات
+            updateAchievements(thoughts.length, notes.length);
+        }
+
+        // تحديث الإنجازات
+        function updateAchievements(thoughtsCount, notesCount) {
+            const achievements = [];
+            
+            if (thoughtsCount >= 1) achievements.push("أول رسالة محفوظة ✨");
+            if (thoughtsCount >= 5) achievements.push("كاتبة نشيطة 📝");
+            if (thoughtsCount >= 10) achievements.push("مشاركة دائمة 💌");
+            if (notesCount >= 1) achievements.push("أول يومية خاصة 🗒️");
+            if (notesCount >= 5) achievements.push("كاتبة يوميات 📖");
+            
+            const achievementsList = document.getElementById('achievementsList');
+            if (achievements.length === 0) {
+                achievementsList.innerHTML = '<p style="text-align:center; color: var(--dark); opacity:0.7;">لا توجد إنجازات بعد.</p>';
+            } else {
+                let html = '';
+                achievements.forEach(achievement => {
+                    html += `<div class="memory-item">${achievement}</div>`;
+                });
+                achievementsList.innerHTML = html;
+            }
+        }
+        
+        // معالجة اختيار الوسائط
+        function handleMediaSelect(input, type) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const mediaData = e.target.result;
+                    currentMedia.push({
+                        type: type,
+                        data: mediaData,
+                        name: file.name
+                    });
+                    updateMediaPreview();
+                };
+                reader.readAsDataURL(file);
+            }
+            input.value = ''; // إعادة تعيين المدخل
+        }
+        
+        // تحديث معاينة الوسائط
+        function updateMediaPreview() {
+            const preview = document.getElementById('mediaPreview');
+            preview.innerHTML = '';
+            
+            if (currentMedia.length > 0) {
+                preview.classList.add('active');
+                
+                currentMedia.forEach((media, index) => {
+                    let mediaElement = '';
+                    if (media.type === 'image') {
+                        mediaElement = `<div class="preview-item">
+                            <img src="${media.data}" alt="صورة">
+                            <button class="remove-media" onclick="removeMedia(${index})">×</button>
+                        </div>`;
+                    } else if (media.type === 'video') {
+                        mediaElement = `<div class="preview-item">
+                            <video controls>
+                                <source src="${media.data}" type="video/mp4">
+                                متصفحك لا يدعم تشغيل الفيديو
+                            </video>
+                            <button class="remove-media" onclick="removeMedia(${index})">×</button>
+                        </div>`;
+                    } else if (media.type === 'audio') {
+                        mediaElement = `<div class="audio-preview">
+                            <audio controls>
+                                <source src="${media.data}" type="audio/mpeg">
+                                متصفحك لا يدعم تشغيل الصوت
+                            </audio>
+                            <button class="remove-media" onclick="removeMedia(${index})">×</button>
+                        </div>`;
+                    }
+                    
+                    preview.innerHTML += mediaElement;
+                });
+            } else {
+                preview.classList.remove('active');
+            }
+        }
+        
+        // إزالة وسائط من المعاينة
+        function removeMedia(index) {
+            currentMedia.splice(index, 1);
+            updateMediaPreview();
+        }
+        
+        // إزالة وسائط من اليوميات المحفوظة
+        function removeSavedMedia(button) {
+            button.parentElement.remove();
+        }
+        
+        // إضافة وسائط أخرى
+        function addOtherMedia() {
+            alert('يمكنك إضافة أي نوع من الملفات باستخدام الأزرار المخصصة للصور والفيديوهات والصوتيات.');
+        }
+        
+        // عرض خيارات إضافية
+        function showMoreOptions() {
+            alert('خيارات إضافية قريباً! ❤️');
+        }
+        
+        // تغيير كلمة السر
+        function changePassword() {
+            const currentPassword = document.getElementById('currentPassword').value;
+            const newPassword = document.getElementById('newPassword').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // الحصول على كلمة السر الحالية
+            const storedPassword = localStorage.getItem('alaaPassword') || DEFAULT_PASSWORD;
+            
+            if (currentPassword !== storedPassword) {
+                alert('كلمة السر الحالية غير صحيحة!');
+                return;
+            }
+            
+            if (newPassword.length < 4) {
+                alert('كلمة السر الجديدة يجب أن تكون 4 أحرف على الأقل!');
+                return;
+            }
+            
+            if (newPassword !== confirmPassword) {
+                alert('كلمة السر الجديدة غير متطابقة!');
+                return;
+            }
+            
+            // حفظ كلمة السر الجديدة
+            localStorage.setItem('alaaPassword', newPassword);
+            
+            // إظهار رسالة نجاح
+            showNotification('تم تغيير كلمة السر بنجاح!');
+            
+            // مسح الحقول
+            document.getElementById('currentPassword').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('confirmPassword').value = '';
+        }
+    </script>
+</body>
+</html>
